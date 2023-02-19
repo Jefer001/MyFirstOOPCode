@@ -2,11 +2,13 @@
 
 namespace MyFirstOOPCode
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var dateObject = new Date(4, 5, 6);
+
+            Console.WriteLine(dateObject);
         }
     }
 }
