@@ -6,9 +6,16 @@ namespace MyFirstOOPCode
     {
         static void Main(string[] args)
         {
-            var dateObject = new Date(4, 5, 6);
+            try
+            {
+                var dateObject = new Date(2025, 2, 29);
 
-            Console.WriteLine(dateObject);
+                Console.WriteLine(dateObject);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
