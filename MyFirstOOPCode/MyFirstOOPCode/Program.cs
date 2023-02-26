@@ -6,53 +6,87 @@ namespace MyFirstOOPCode
     {
         static void Main(string[] args)
         {
-            SalaryEmployee salaryEmployeeObject = new SalaryEmployee();
             try
             {
-                //var dateObjectBirthDate = new Date(1920, 2, 8);
-                //var dateObjectHiringDate = new Date(2023, 1, 1);
-                Console.WriteLine("");
-                Console.WriteLine("What's your first name?");
-                salaryEmployeeObject.FirstName = Console.ReadLine();
-                Console.WriteLine($"{salaryEmployeeObject.FirstName} what's your last name?");
-                salaryEmployeeObject.LastName = Console.ReadLine();
-                Console.WriteLine($"{salaryEmployeeObject.FirstName} when is your birthday? aaaa/mm/dd");
-                string[] birthday = Console.ReadLine().Split('/');
-                salaryEmployeeObject.BirthDate = new Date(int.Parse(birthday[0]), int.Parse(birthday[1]), int.Parse(birthday[2]));
-                Console.WriteLine($"{salaryEmployeeObject.FirstName} when they hired you?");
-                string[] hireday = Console.ReadLine().Split('/');
-                salaryEmployeeObject.HiringDate = new Date(int.Parse(hireday[0]), int.Parse(hireday[1]), int.Parse(hireday[2]));
-                Console.WriteLine($"{salaryEmployeeObject.FirstName} you are employed?");
-                salaryEmployeeObject.IsActive = ValidateIsActive(Console.ReadLine().ToLower());
-                Console.WriteLine($"{salaryEmployeeObject.FirstName} what is your salary");
-                salaryEmployeeObject.salary = decimal.Parse(Console.ReadLine());
+                //Console.WriteLine("");
+                //Console.WriteLine("What's your first name?");
+                //string firstName = Console.ReadLine();
+
+                //Console.WriteLine($"{firstName} what's your last name?");
+                //string lastName = Console.ReadLine();
+
+                //Console.WriteLine($"{firstName} when is your birthday? yyyy/mm/dd");
+                //string[] birthday = Console.ReadLine().Split('/');
+                //var dateObjectBirthDate = new Date(Convert.ToInt16(birthday[0]), Convert.ToInt16(birthday[1]), Convert.ToInt16(birthday[2]));
+
+                //Console.WriteLine($"{firstName} when they hired you? yyyy/mm/dd");
+                //string[] hireday = Console.ReadLine().Split('/');
+                //var dateObjectHiringDate = new Date(Convert.ToInt16(hireday[0]), Convert.ToInt16(hireday[1]), Convert.ToInt16(hireday[2]));
+
+                //Console.WriteLine($"{firstName} you are employed?");
+                //bool isActive = Convert.ToBoolean(Console.ReadLine());
+
+                //Console.WriteLine($"{firstName} what is your salary");
+                //decimal salary = decimal.Parse(Console.ReadLine());
+
                 //SalaryEmployee salaryEmployeeObject = new SalaryEmployee()
                 //{
-
                 //    Id = 1233,
-                //    FirstName = "Maria",
-                //    LastName = "Sanl",
+                //    FirstName = firstName,
+                //    LastName = lastName,
                 //    BirthDate = dateObjectBirthDate,
                 //    HiringDate = dateObjectHiringDate,
                 //    IsActive = true,
-                //    salary = 1600000.56M
+                //    salary = salary
                 //};
-                Console.WriteLine(salaryEmployeeObject.ToString());
-                Console.WriteLine();
+                //Console.WriteLine("*******************");
+                //Console.WriteLine("* Salary Employee *");
+                //Console.WriteLine("*******************");
+                //Console.WriteLine(salaryEmployeeObject.ToString());
+                Console.WriteLine("");
+
+                Console.WriteLine("What's your first name?");
+                string firstName = Console.ReadLine();
+
+                Console.WriteLine($"{firstName} what's your last name?");
+                string lastName = Console.ReadLine();
+
+                Console.WriteLine($"{firstName} when is your birthday? yyyy/mm/dd");
+                string[] birthday = Console.ReadLine().Split('/');
+                var dateObjectBirthDate = new Date(Convert.ToInt16(birthday[0]), Convert.ToInt16(birthday[1]), Convert.ToInt16(birthday[2]));
+
+                Console.WriteLine($"{firstName} when they hired you? yyyy/mm/dd");
+                string[] hireday = Console.ReadLine().Split('/');
+                var dateObjectHiringDate = new Date(Convert.ToInt16(hireday[0]), Convert.ToInt16(hireday[1]), Convert.ToInt16(hireday[2]));
+
+                Console.WriteLine($"{firstName} you are employed?");
+                bool isActive = Convert.ToBoolean(Console.ReadLine());
+
+                Console.WriteLine($"{firstName} Type ypur in percentage?");
+                double commissionPercentage = Convert.ToDouble(Console.ReadLine());
+
+                Console.WriteLine($"{firstName} Type your sales?");
+                decimal sale = Convert.ToDecimal(Console.ReadLine());
+
+                Employee commissionEmployee = new CommissionEmployee() 
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    BirthDate = dateObjectBirthDate,
+                    HiringDate = dateObjectHiringDate, 
+                    IsActive = isActive,
+                    CommissionPercentge = commissionPercentage,
+                    Sales = sale
+                };
+                Console.WriteLine("***********************");
+                Console.WriteLine("* Commission Employee *");
+                Console.WriteLine("***********************");
+                Console.WriteLine("");
+                Console.WriteLine(commissionEmployee.ToString());
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }
-
-            bool ValidateIsActive(string employee)
-            {
-                if(employee != "yes" && employee != "no")
-                {
-                    Console.WriteLine($"{salaryEmployeeObject.FirstName} you are employed?");
-                    salaryEmployeeObject.IsActive = ValidateIsActive(Console.ReadLine().ToLower());
-                }
-                return employee == "yes";
             }
         }
     }
