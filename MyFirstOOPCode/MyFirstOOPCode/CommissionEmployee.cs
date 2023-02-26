@@ -7,7 +7,7 @@ namespace MyFirstOOPCode
     public class CommissionEmployee : Employee
     {
         #region Fields
-        private int percentage = 100;
+        private readonly int percentage = 100;
         #endregion
 
         #region Properties
@@ -26,10 +26,10 @@ namespace MyFirstOOPCode
             return $"{base.ToString()}" +
                 $"Commission Percentage ......{ConvertPercentage(CommissionPercentge):P2}\n\t" +
                 $"Sales.......................{Sales:C2}\n\t" +
-                $"Value to Pay................{GetValueToPay():C2}";
+                $"Value to Pay................{GetValueToPay():C2}\n\t";
         }
 
-        private double ConvertPercentage(double commissionPercentag)
+        public double ConvertPercentage(double commissionPercentag)
         {
             return commissionPercentag / percentage;
         }
