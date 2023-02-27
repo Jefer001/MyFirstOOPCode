@@ -19,7 +19,7 @@ namespace MyFirstOOPCode
         public override string ToString()
         {
             return $"{base.ToString()}" +
-                $"Base...................{Base:C2}\n\t" +
+                $"Base........................{Base:C2}\n\t" +
                 $"Tota value to Pay...........{GetValueToPay():C2}\n\t";
         }
         #endregion
