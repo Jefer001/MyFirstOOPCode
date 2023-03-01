@@ -11,7 +11,12 @@ namespace MyFirstOOPCode
         #endregion
 
         #region Methods
-        public decimal GetValueToPay()
+        public override decimal GetValueToPay()
+        {
+            return base.GetValueToPay();
+        }
+
+        public decimal TotalGetValueToPay()
         {
             return base.GetValueToPay() + Base;
         }
@@ -20,7 +25,7 @@ namespace MyFirstOOPCode
         {
             return $"{base.ToString()}" +
                 $"Base........................{Base:C2}\n\t" +
-                $"Tota value to Pay...........{GetValueToPay():C2}\n\t";
+                $"Tota value to Pay...........{TotalGetValueToPay():C2}\n\t";
         }
         #endregion
     }

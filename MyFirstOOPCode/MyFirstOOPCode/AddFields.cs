@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace MyFirstOOPCode
@@ -35,6 +36,8 @@ namespace MyFirstOOPCode
 
             Console.WriteLine($"{firstName} what is your salary");
             salary = decimal.Parse(Console.ReadLine());
+
+            AddSalaryEmployee();
         }
 
         public void EnterCommissionEmployee()
@@ -45,6 +48,8 @@ namespace MyFirstOOPCode
 
             Console.WriteLine($"{firstName} Type your sales?");
             sale = Convert.ToDecimal(Console.ReadLine());
+
+            AddCommissionSalary();
         }
 
         public void EnterHourlyEmployee()
@@ -56,6 +61,8 @@ namespace MyFirstOOPCode
 
             Console.WriteLine($"{firstName} your value per hour?");
             hoursValue = Convert.ToDecimal(Console.ReadLine());
+
+            AddHourlyEmployee();
         }
 
         public void EnterBaseCommissionEmployee()
@@ -69,9 +76,11 @@ namespace MyFirstOOPCode
 
             Console.WriteLine($"{firstName} your salary base?");
             Base = Convert.ToDecimal(Console.ReadLine());
+
+            AddBaseCommissionEmployee();
         }
 
-        public object AddSalaryEmployee()
+        public void AddSalaryEmployee()
         {
             salaryEmployee = new SalaryEmployee()
             {
@@ -83,10 +92,9 @@ namespace MyFirstOOPCode
                 IsActive = isActive,
                 salary = salary
             };
-            return salaryEmployee;
         }
 
-        public object AddCommissionSalary()
+        public void AddCommissionSalary()
         {
             commissionEmployee = new CommissionEmployee()
             {
@@ -98,10 +106,9 @@ namespace MyFirstOOPCode
                 CommissionPercentge = commissionPercentage,
                 Sales = sale
             };
-            return commissionEmployee;
         }
 
-        public object AddHourlyEmployee()
+        public void AddHourlyEmployee()
         {
             HourlyEmployee = new HourlyEmplyee()
             {
@@ -113,10 +120,9 @@ namespace MyFirstOOPCode
                 Hours = hours,
                 HoursValue = hoursValue
             };
-            return HourlyEmployee;
         }
 
-        public object AddBaseCommissionEmployee()
+        public void AddBaseCommissionEmployee()
         {
             baseCommissionEmployee = new BaseCommissionEmployee()
             {
@@ -129,7 +135,6 @@ namespace MyFirstOOPCode
                 Sales = sale,
                 Base = Base
             };
-            return baseCommissionEmployee;
         }
 
         public object AddInvoice()
@@ -144,26 +149,29 @@ namespace MyFirstOOPCode
             return invoice;
         }
 
-        public void inicial()
+        public void Print()
         {
             ICollection<Employee> employees = new List<Employee>() 
             {
-                salaryEmployee,
-                commissionEmployee,
-                HourlyEmployee, 
+                //salaryEmployee,
+                //commissionEmployee,
+                //HourlyEmployee,
                 baseCommissionEmployee,
             };
             foreach (Employee employee in employees)
             {
-                Console.WriteLine(employee);
-                payRoll += employee.GetValueToPay();
-                Console.WriteLine("");
+                if(employee.IsActive == true) 
+                {
+                    Console.WriteLine(employee);
+                    payRoll += employee.GetValueToPay();
+                    Console.WriteLine("");
+                }
             }
         }
 
-        public string Print()
+        public string PrintPayRoll()
         {
-            return string.Format("Total Payroll............{0}", payRoll);
+            return string.Format("Total Payroll................{0:C2}", payRoll);
         }
 
         public string ToString(object typeEmployee)
@@ -190,7 +198,7 @@ namespace MyFirstOOPCode
             dateObjectBirthDate = new Date(Convert.ToInt16(birthday[0]), Convert.ToInt16(birthday[1]), Convert.ToInt16(birthday[2]));
 
             Console.WriteLine($"{firstName} when they hired you? yyyy/mm/dd");
-            string[] hireday = Console.ReadLine().Split('/');
+            string[] hireday = ValidatedDates(birthday, Console.ReadLine().Split('/'));
             dateObjectHiringDate = new Date(Convert.ToInt16(hireday[0]), Convert.ToInt16(hireday[1]), Convert.ToInt16(hireday[2]));
 
             Console.WriteLine($"{firstName} you are employed? Yes/No");
@@ -207,10 +215,23 @@ namespace MyFirstOOPCode
         {
             if (answer != "yes" && answer != "no")
             {
+                Console.WriteLine("Wrong answer, try again");
                 Console.WriteLine($"{firstName} you are employed?");
                 isActive = ValidateIsActive(Console.ReadLine().ToLower());
             }
             return answer == "yes";
+        }
+
+        private string[] ValidatedDates(string[] birthdys, string[] hiredys)
+        {
+            int dif = Convert.ToInt32(hiredys[0]) - Convert.ToInt32(birthdys[0]);
+            if(dif < 18 || dif > 74)
+            {
+                Console.WriteLine("Wrong date, try again");
+                Console.WriteLine($"{firstName} when they hired you? yyyy/mm/dd");
+                _ = ValidatedDates(birthdys, Console.ReadLine().Split('/'));
+            }
+            return hiredys;
         }
         #endregion
     }
